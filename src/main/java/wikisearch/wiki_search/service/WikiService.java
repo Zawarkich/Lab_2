@@ -19,7 +19,7 @@ public class WikiService {
     
     public WikiArticle search(String term) {
         WikiArticle article = new WikiArticle(term, "Content about " + term);
-        articleRepo.save(article); // теперь используется
+        articleRepo.save(article);
         return article;
     }
     
