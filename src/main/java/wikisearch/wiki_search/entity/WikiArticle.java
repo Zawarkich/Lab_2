@@ -12,6 +12,9 @@ public class WikiArticle {
     private Long id;
     
     private String title;
+    
+    @Lob
+    @Column(length = 10000)
     private String content;
     
     @ManyToOne(fetch = FetchType.LAZY)
