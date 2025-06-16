@@ -2,41 +2,41 @@ package wikisearch.wiki_search.controller;
 
 import org.springframework.web.bind.annotation.*;
 import wikisearch.wiki_search.entity.WikiArticle;
-import wikisearch.wiki_search.repository.WikiArticleRepository;
+import wikisearch.wiki_search.service.WikiService;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/articles")
 public class WikiArticleCrudController {
-    private final WikiArticleRepository articleRepo;
+    private final WikiService wikiService;
 
-    public WikiArticleCrudController(WikiArticleRepository articleRepo) {
-        this.articleRepo = articleRepo;
+    public WikiArticleCrudController(WikiService wikiService) {
+        this.wikiService = wikiService;
     }
 
     @GetMapping
     public List<WikiArticle> getAll() {
-        return articleRepo.findAll();
+        return wikiService.getAllArticles();
     }
 
     @GetMapping("/{id}")
     public WikiArticle getById(@PathVariable Long id) {
-        return articleRepo.findById(id).orElse(null);
+        return wikiService.getArticleById(id);
     }
 
     @PostMapping
     public WikiArticle create(@RequestBody WikiArticle article) {
-        return articleRepo.save(article);
+        return wikiService.saveArticle(article);
     }
 
     @PutMapping("/{id}")
     public WikiArticle update(@PathVariable Long id, @RequestBody WikiArticle article) {
         article.setId(id);
-        return articleRepo.save(article);
+        return wikiService.saveArticle(article);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        articleRepo.deleteById(id);
+        wikiService.deleteArticle(id);
     }
 }

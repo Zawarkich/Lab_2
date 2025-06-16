@@ -48,4 +48,28 @@ public class WikiService {
     public List<SearchHistory> getAllHistories() {
         return historyRepo.findAll();
     }
+
+    public List<WikiArticle> getAllArticles() {
+        return articleRepo.findAll();
+    }
+
+    public WikiArticle getArticleById(Long id) {
+        return articleRepo.findById(id).orElse(null);
+    }
+
+    public WikiArticle saveArticle(WikiArticle article) {
+        return articleRepo.save(article);
+    }
+
+    public void deleteArticle(Long id) {
+        articleRepo.deleteById(id);
+    }
+
+    public SearchHistory getHistoryById(Long id) {
+        return historyRepo.findById(id).orElse(null);
+    }
+
+    public void deleteHistory(Long id) {
+        historyRepo.deleteById(id);
+    }
 }
